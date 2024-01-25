@@ -1,4 +1,4 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model, Types } = require("mongoose");
 
 // TODO: Please make sure you edit the Book model to whatever makes sense in this case
 const tripSchema = new Schema(

@@ -30,6 +30,6 @@ const groceryItemSchema = new Schema(
   }
 );
 
-const groceryItem = model("GroceryItem", groceryItemSchema);
+const GroceryItem = model("GroceryItem", groceryItemSchema);
 
 module.exports = GroceryItem;
