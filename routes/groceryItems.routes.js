@@ -69,7 +69,9 @@ router.delete("/:groceryItemId", isAuthenticated, async (req, res) => {
   const { groceryItemId } = req.params;
   const { userId } = req.tokenPayload;
   try {
-    const groceryItemToDelete = GroceryItem.findByIdAndDelete(groceryItemId);
+    const groceryItemToDelete = await GroceryItem.findByIdAndDelete(
+      groceryItemId
+    );
     if (groceryItemToDelete.createdBy == userId) {
       await GroceryItem.findByIdAndDelete(groceryItemId);
       res.status(204).json();
