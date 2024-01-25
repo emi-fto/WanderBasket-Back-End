@@ -4,13 +4,9 @@ const userSchema = new Schema(
   {
     picture: {
       type: String,
-      required: true,
+      default: "https://cdn-icons-png.flaticon.com/512/9131/9131529.png",
     },
-    username: {
-      type: String,
-      required: true,
-      unique: true,
-    },
+
     email: {
       type: String,
       required: true,
@@ -18,7 +14,14 @@ const userSchema = new Schema(
       lowercase: true,
       unique: true,
     },
+
     hashedPassword: { type: String, required: true },
+
+    username: {
+      type: String,
+      required: true,
+      unique: true,
+    },
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`

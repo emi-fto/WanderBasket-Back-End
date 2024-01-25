@@ -14,20 +14,18 @@ router.get("/", async (req, res) => {
 });
 
 // Get all trips for a specific participant // /api/trips/emiliano
-router.get("/:userId", async (req, res) => {
-  const participantId = req.params;
+router.get("/user/:userId", async (req, res) => {
+  const userId = req.params.userId;
   try {
-    const tripsForSpecificParticipant = Trip.find({
-      participants: { $in: [participantId] },
+    const tripsForSpecificParticipant = await Trip.find({
+      participants: { $in: [userId] },
     });
     res.json(tripsForSpecificParticipant);
   } catch (error) {
     console.log(error);
-    res
-      .status(500)
-      .json({
-        message: "error while getting the trips for a specific participant",
-      });
+    res.status(500).json({
+      message: "error while getting the trips for a specific participant",
+    });
   }
 });
 
@@ -58,7 +56,7 @@ router.post("/", isAuthenticated, async (req, res) => {
 });
 
 // Edit one trip -- ONLY for authenticated users -- ONLY for participants to the trip
-router.put("/: tripId", isAuthenticated, async (req, res) => {
+router.put("/:tripId", isAuthenticated, async (req, res) => {
   const { userId } = req.tokenPayload;
   const payload = req.body;
   const { tripId } = req.params;
@@ -70,11 +68,9 @@ router.put("/: tripId", isAuthenticated, async (req, res) => {
       });
       res.status(200).json(updatedTrip);
     } else {
-      res
-        .status(403)
-        .json({
-          message: "you dont have rights to edit this trip (not a participant)",
-        });
+      res.status(403).json({
+        message: "you dont have rights to edit this trip (not a participant)",
+      });
     }
   } catch (error) {
     console.log(error);

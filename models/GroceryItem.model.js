@@ -8,12 +8,12 @@ const groceryItemSchema = new Schema(
       trim: true,
     },
     quantity: {
-      type: Number,
+      type: String,
       required: [true, "Quantity is required."],
     },
     label: {
       type: String,
-      enum: ["need to be purchased", "someone will bring it"],
+      enum: ["Needs to be purchased", "Someone will bring it"],
       required: [true, "Label is required."],
     },
     trip: {

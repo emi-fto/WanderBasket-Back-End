@@ -3,6 +3,11 @@ const { Schema, model, Types } = require("mongoose");
 // TODO: Please make sure you edit the Book model to whatever makes sense in this case
 const tripSchema = new Schema(
   {
+    title: {
+      type: String,
+      required: [true, "Title is required."],
+      trim: true,
+    },
     image: {
       type: String,
       required: [true, "Image is required."],
