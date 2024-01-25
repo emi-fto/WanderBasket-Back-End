@@ -1,5 +1,6 @@
 const { isAuthenticated } = require("../middlewares/route-guard.middleware");
 const Trip = require("../models/Trip.model");
+const GroceryItem = require("../models/GroceryItem.model");
 const router = require("express").Router();
 
 // Get all trips
@@ -29,11 +30,27 @@ router.get("/user/:userId", async (req, res) => {
   }
 });
 
+// Get all groceries for a specific trip // /api/trips/:tripId/groceryitens
+router.get("/:tripId/groceryitems", async (req, res) => {
+  const tripId = req.params.tripId;
+  try {
+    const groceriesForOneTrip = await GroceryItem.find({ trip: tripId });
+    res.json(groceriesForOneTrip);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: "error while getting the groceries for a specific trip",
+    });
+  }
+});
+
 // Get one trip
 router.get("/:tripId", async (req, res) => {
   const { tripId } = req.params;
   try {
-    const oneTrip = await Trip.findById(tripId);
+    const oneTrip = await Trip.findById(tripId)
+      .populate("groceries")
+      .populate("participants");
     res.status(200).json(oneTrip);
   } catch (error) {
     console.log(error);

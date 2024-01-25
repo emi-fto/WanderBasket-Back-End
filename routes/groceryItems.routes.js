@@ -49,7 +49,7 @@ router.put("/:groceryItemId", isAuthenticated, async (req, res) => {
   try {
     const groceryItemToUpdate = await GroceryItem.findById(groceryItemId);
     if (groceryItemToUpdate.createdBy == userId) {
-      const groceryItemToUpdate = await Book.findByIdAndUpdate(
+      const groceryItemToUpdate = await GroceryItem.findByIdAndUpdate(
         groceryItemId,
         payload,
         { new: true }
