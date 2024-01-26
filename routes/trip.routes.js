@@ -34,9 +34,7 @@ router.get("/user/:userId", async (req, res) => {
 router.get("/:tripId/groceryitems", async (req, res) => {
   const tripId = req.params.tripId;
   try {
-    const groceriesForOneTrip = await GroceryItem.find({
-      trip: { $in: [tripId] },
-    });
+    const groceriesForOneTrip = await GroceryItem.find({ trip: tripId });
     res.json(groceriesForOneTrip);
   } catch (error) {
     console.log(error);
