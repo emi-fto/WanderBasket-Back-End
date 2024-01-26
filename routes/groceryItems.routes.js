@@ -1,5 +1,6 @@
 const { isAuthenticated } = require("../middlewares/route-guard.middleware");
 const GroceryItem = require("../models/GroceryItem.model");
+const Trip = require("../models/Trip.model");
 const router = require("express").Router();
 
 //Get All
@@ -34,6 +35,12 @@ router.post("/", isAuthenticated, async (req, res) => {
   payload.createdBy = userId;
   try {
     const createdGroceryItem = await GroceryItem.create(payload);
+
+    // add grocery id to the trip model
+    const tripToUpdate = await Trip.findById(payload.trip);
+    tripToUpdate.groceries.push(createdGroceryItem._id);
+    tripToUpdate.save();
+
     res.status(201).json(createdGroceryItem);
   } catch (error) {
     console.log(error);
