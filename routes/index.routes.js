@@ -10,4 +10,7 @@ router.use("/groceryItems", groceryItemsRouter);
 const tripsRouter = require("./trip.routes");
 router.use("/trips", tripsRouter);
 
+const usersRouter = require("./user.routes");
+router.use("/users", usersRouter);
+
 module.exports = router;
