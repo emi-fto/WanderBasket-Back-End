@@ -39,8 +39,8 @@ router.post("/", isAuthenticated, async (req, res) => {
     // add grocery id to the trip model
     const tripToUpdate = await Trip.findById(payload.trip);
     tripToUpdate.groceries.push(createdGroceryItem._id);
-    tripToUpdate.save();
-
+    await tripToUpdate.save();
+    console.log({tripToUpdate})
     res.status(201).json(createdGroceryItem);
   } catch (error) {
     console.log(error);
@@ -75,12 +75,17 @@ router.put("/:groceryItemId", isAuthenticated, async (req, res) => {
 router.delete("/:groceryItemId", isAuthenticated, async (req, res) => {
   const { groceryItemId } = req.params;
   const { userId } = req.tokenPayload;
+  console.warn(req.params)
   try {
-    const groceryItemToDelete = await GroceryItem.findByIdAndDelete(
+    const groceryItemToDelete = await GroceryItem.findById(
       groceryItemId
     );
     if (groceryItemToDelete.createdBy == userId) {
-      await GroceryItem.findByIdAndDelete(groceryItemId);
+        await GroceryItem.findByIdAndDelete(groceryItemId);
+        const tripToUpdate = await Trip.findById(groceryItemToDelete.trip);
+        console.log({tripToUpdate})
+        tripToUpdate.groceries.remove(groceryItemToDelete._id);
+        await tripToUpdate.save();
       res.status(204).json();
     } else {
       res.status(403).json({ message: "you are not the right user" });
