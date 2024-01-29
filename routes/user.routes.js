@@ -12,4 +12,24 @@ router.get("/", async (req, res) => {
   }
 });
 
+// Endpoint to get user data
+router.get('/api/user/:userId', async (req, res) => {
+  try {
+    const user = await User.findById(req.params.userId);
+    res.json(user);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+});
+
+// Endpoint to update user data
+router.put('/api/user/:userId', async (req, res) => {
+  try {
+    const updatedUser = await User.findByIdAndUpdate(req.params.userId, req.body, { new: true });
+    res.json(updatedUser);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+});
+
 module.exports = router;
