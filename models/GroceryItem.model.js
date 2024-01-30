@@ -7,6 +7,10 @@ const groceryItemSchema = new Schema(
       required: [true, "Name of the item is required."],
       trim: true,
     },
+    image:{
+      type:String,
+      default:"https://www.freepik.com/free-photo/top-view-fresh-vegetables-arrangement_22632474.htm#query=grocery&position=7&from_view=keyword&track=sph&uuid=8243c70f-4c68-4b2a-98eb-a362e010d867",
+    },
     quantity: {
       type: String,
       required: [true, "Quantity is required."],

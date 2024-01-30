@@ -8,6 +8,9 @@ const tripSchema = new Schema(
       required: [true, "Title is required."],
       trim: true,
     },
+    description:{
+      type: String,
+    },
     image: {
       type: String,
       required: [true, "Image is required."],
