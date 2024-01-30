@@ -33,8 +33,19 @@ router.get("/user/:userId", async (req, res) => {
 // Get all groceries for a specific trip // /api/trips/:tripId/groceryitens
 router.get("/:tripId/groceryitems", async (req, res) => {
   const tripId = req.params.tripId;
+  const query = req.query.q; // Retrieve the value of the 'q' query parameter
   try {
-    const groceriesForOneTrip = await GroceryItem.find({ trip: tripId });
+    let groceriesForOneTrip;
+    if (query) {
+      // If a search query is provided, filter groceries by name using a regular expression
+      groceriesForOneTrip = await GroceryItem.find({
+        trip: tripId,
+        name: { $regex: new RegExp(query, "i") },
+      });
+    } else {
+      // If no search query is provided, fetch all groceries for the trip
+      groceriesForOneTrip = await GroceryItem.find({ trip: tripId });
+    }
     res.json(groceriesForOneTrip);
   } catch (error) {
     console.log(error);
