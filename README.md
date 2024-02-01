@@ -1,4 +1,10 @@
-# Wander Basket - Backend API
+# Wander Basket - Backend MongoDB API
+
+<br>
+
+## Sometimes a Backend is more than just behind the scenes!
+
+![App Logo](https://github.com/emi-fto/E-commerce-Web-App-React/blob/main/src/assets/images/Rebay%20Logo.png)
 
 <br>
 
@@ -154,4 +160,4 @@ GroceryItem model
 
 ### Slides
 
-[Slides Link]()
+[Slides Link](https://pitch.com/v/wanderbasket-your-ultimate-tavel-grocery-companion-xgytz9)
