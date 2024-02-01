@@ -4,7 +4,7 @@
 
 ## Sometimes a Backend is more than just behind the scenes!
 
-![App Logo](https://github.com/emi-fto/E-commerce-Web-App-React/blob/main/src/assets/images/Rebay%20Logo.png)
+![App Logo](https://github.com/emi-fto/Trip-Planner---Module-3-Project-Back-End-/blob/main/images/applogo_color.png)
 
 <br>
 
