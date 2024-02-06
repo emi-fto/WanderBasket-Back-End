@@ -14,7 +14,7 @@ router.get("/", async (req, res) => {
 });
 
 // Endpoint to get user data
-router.get('/:userId',isAuthenticated, async (req, res) => {
+router.get("/:userId", isAuthenticated, async (req, res) => {
   try {
     const user = await User.findById(req.params.userId);
     res.json(user);
@@ -24,9 +24,13 @@ router.get('/:userId',isAuthenticated, async (req, res) => {
 });
 
 // Endpoint to update user data
-router.put('/:userId', isAuthenticated, async (req, res) => {
+router.put("/:userId", isAuthenticated, async (req, res) => {
   try {
-    const updatedUser = await User.findByIdAndUpdate(req.params.userId, req.body, { new: true });
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.userId,
+      req.body,
+      { new: true }
+    );
     res.json(updatedUser);
   } catch (error) {
     res.status(500).send(error.message);
